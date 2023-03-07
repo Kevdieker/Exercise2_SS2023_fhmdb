@@ -25,6 +25,7 @@
             <artifactId>javafx-fxml</artifactId>
             <version>19</version>
         </dependency>
+
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
@@ -38,12 +39,9 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+
     <build>
         <plugins>
-            <plugin>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.22.2</version>
-            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -62,7 +60,7 @@
                         <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>at.ac.fhcampuswien.fhmdb.fhmdb/at.ac.fhcampuswien.fhmdb.Home
+                            <mainClass>at.ac.fhcampuswien.fhmdb.fhmdb/at.ac.fhcampuswien.fhmdb.fhmdb.Home
                             </mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
