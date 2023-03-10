@@ -10,6 +10,7 @@ public class Movie {
     private String title;
     private String description;
     private List<Genre> genres;
+    private static List<Movie> movies = new ArrayList<>();
 
 
     public Movie(String title) {
@@ -36,19 +37,22 @@ public class Movie {
         return description;
     }
 
+    public List<Genre> getGenres() {
+        return genres;
+    }
+
     public String getGenresInStringFormat() {
         return genres.toString();
     }
 
     public static List<Movie> initializeMovies() {
-        List<Movie> movies = new ArrayList<>();
+        //List<Movie> movies = new ArrayList<>();
 
         Movie movie = new Movie("Campus Couples Love Story");
         movie.setDescription(
                 "2 students, 1 love. Between lectures, exercises and test there is something exciting and new. Our two main character experience the beauty of love. But not \n" +"only there are struggles in their new found love, but also they have to face the challenges of studying ...\n");
         movie.setGenres(Arrays.asList(ROMANCE, WAR, DRAMA, COMEDY));
         movies.add(movie);
-
 
         movie = new Movie("Matrix Murder");
         movie.setDescription(
@@ -77,5 +81,13 @@ public class Movie {
         return movies;
     }
 
-
+    public static List<Movie> filterMoviesAfterGenre(Genre genre){
+        List<Movie> filteredMovies = new ArrayList<>();
+        for (Movie movie:movies){
+            if (movie.getGenres().contains(genre)){
+                filteredMovies.add(movie);
+            }
+        }
+        return filteredMovies;
+    }
 }
