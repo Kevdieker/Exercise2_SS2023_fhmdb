@@ -16,7 +16,7 @@ public class Home extends Application {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("home.fxml")));
         stage.setTitle("MovieCampus");
 
-        stage.getIcons().add(new Image("C:\\Users\\kevin\\Projekte\\IdeaProjects\\javaProjects\\javaFX_Projects\\Exercise1_SS2023_fhmdb\\src\\main\\resources\\at\\ac\\fhcampuswien\\fhmdb\\fhmdb\\images\\movie_campus.png"));
+        //stage.getIcons().add(new Image("C:\\Users\\kevin\\Projekte\\IdeaProjects\\javaProjects\\javaFX_Projects\\Exercise1_SS2023_fhmdb\\src\\main\\resources\\at\\ac\\fhcampuswien\\fhmdb\\fhmdb\\images\\movie_campus.png"));
 
         stage.setScene(new Scene(root,1215,790));
         stage.show();

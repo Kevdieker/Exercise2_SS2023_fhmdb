@@ -3,6 +3,7 @@ package at.ac.fhcampuswien.fhmdb.fhmdb;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ComboBox;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
@@ -15,12 +16,23 @@ public class HomeController implements Initializable {
 
     @FXML
     private VBox home;
-    private List<Movie> movies;
+    @FXML
+    private ComboBox<Genre> genreBox;
+    private List<Movie> allMovies;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        movies = new ArrayList<>(Movie.initializeMovies());
+        genreBox.getItems().addAll(Genre.values());
+        allMovies = new ArrayList<>(Movie.initializeMovies());
+        loadingMovies(allMovies);
+    }
 
+    public void OnActionFilterMovies(){
+        home.getChildren().clear();
+        loadingMovies(Movie.filterAfterGenre(genreBox.getValue()));
+    }
+
+    public void loadingMovies(List<Movie> movies){
         try {
             for (int i = 0; i < movies.size(); i++) {
                 FXMLLoader fxmlLoader = new FXMLLoader();
@@ -34,6 +46,9 @@ public class HomeController implements Initializable {
             throw new RuntimeException(e);
         }
     }
+
+
+
 }
 
 

@@ -81,7 +81,7 @@ public class Movie {
         return movies;
     }
 
-    public static List<Movie> filterMoviesAfterGenre(Genre genre){
+    public static List<Movie> filterAfterGenre(Genre genre){
         List<Movie> filteredMovies = new ArrayList<>();
         for (Movie movie:movies){
             if (movie.getGenres().contains(genre)){
