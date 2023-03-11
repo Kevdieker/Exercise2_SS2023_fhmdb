@@ -41,6 +41,7 @@ public class Movie {
             }
         }
         return null;
+
     }
     public static List<Movie> getMovies(){
         return movies;
