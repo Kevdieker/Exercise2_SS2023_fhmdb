@@ -34,6 +34,14 @@ public class Movie {
     public String getGenresInStringFormat() {
         return genres.toString();
     }
+    public static Movie getMovieByTitle(String title){
+        for (Movie movie : movies) {
+            if (movie.getTitle().equals(title)) {
+                return movie;
+            }
+        }
+        return null;
+    }
 
     public static List<Movie> getMovies(){
         return movies;
