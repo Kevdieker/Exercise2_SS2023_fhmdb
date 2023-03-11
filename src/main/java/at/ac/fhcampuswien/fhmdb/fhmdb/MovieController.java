@@ -19,4 +19,5 @@ public class MovieController {
         description.setText(movie.getDescription());
         genres.setText(movie.getGenresInStringFormat());
     }
+
 }
