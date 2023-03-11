@@ -15,11 +15,13 @@ public class MovieTest {
 
         //Given
         //wanted Genre = ACTION
-        Movie movie = new Movie("Matrix Murder");
-        //List<Movie> movieList = Arrays.asList(movie,ACTION);
-        Genre wantedGenre = ACTION;
+        Movie movie = new Movie("Matrix");
+        List<Movie> movieList = new ArrayList<>();
+
 
         //When
+
+        //Then
 
     }
     void upper_or_lower_case_should_be_ignored() {
@@ -27,6 +29,7 @@ public class MovieTest {
         String actualName = "MATRIX MURDER";
         assertEquals(expectedName, actualName.toLowerCase());
     }
+
 
     /*  try {
             List<Movie> movieList = new ArrayList<>();
