@@ -21,38 +21,37 @@ public class HomeController implements Initializable {
 
     private List<Movie> movies;
 
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         genreBox.getItems().addAll(Genre.values());
-        sortBox.getItems().addAll("A-Z","Z-A");
+        sortBox.getItems().addAll("A-Z", "Z-A");
         movies = new ArrayList<>(Movie.initializeMovies());
         loadingMovies(movies);
     }
-    public void OnActionFilterMovies(){
 
-        movies=Movie.filterAfterGenre(genreBox.getValue());
+    public void OnActionFilterMovies() {
+        movies = Movie.filterAfterGenre(genreBox.getValue());
         loadingMovies(movies);
     }
-    public void OnActivSortMovies(){
-        if(sortBox.getValue().equals("A-Z")){
+
+    public void OnActiveSortMovies() {
+        if (sortBox.getValue().equals("A-Z")) {
             movies.sort(Comparator.comparing(Movie::getTitle));
-        }
-        else if (sortBox.getValue().equals("Z-A")){
+        } else if (sortBox.getValue().equals("Z-A")) {
             movies.sort(Comparator.comparing(Movie::getTitle).reversed());
         }
         loadingMovies(movies);
     }
 
-    public void loadingMovies(List<Movie> movies){
+    public void loadingMovies(List<Movie> movies) {
         home.getChildren().clear();
         try {
-            for (int i = 0; i < movies.size(); i++) {
+            for (Movie movie : movies) {
                 FXMLLoader fxmlLoader = new FXMLLoader();
                 fxmlLoader.setLocation(getClass().getResource("movie_card.fxml"));
                 VBox movieSpace = fxmlLoader.load();
                 MovieController movieController = fxmlLoader.getController();
-                movieController.setData(movies.get(i));
+                movieController.setData(movie);
                 home.getChildren().add(movieSpace);
             }
         } catch (IOException e) {

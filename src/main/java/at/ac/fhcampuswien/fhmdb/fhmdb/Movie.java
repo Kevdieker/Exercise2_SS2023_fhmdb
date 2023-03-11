@@ -44,17 +44,16 @@ public class Movie {
     }
 
     public static List<Movie> initializeMovies() {
-        //List<Movie> movies = new ArrayList<>();
 
         Movie movie = new Movie("Campus Couple Love Story");
         movie.setDescription(
-                "2 students, 1 love. Between lectures, exercises and test there is something exciting and new. Our two main character experience the beauty of love. But not \n" +"only there are struggles in their new found love, but also they have to face the challenges of studying ...\n");
+                "2 students, 1 love. Between lectures, exercises and test there is something exciting and new. Our two main character experience the beauty of love. But not \n" + "only there are struggles in their new found love, but also they have to face the challenges of studying ...\n");
         movie.setGenres(Arrays.asList(ROMANCE, WAR, DRAMA, COMEDY));
         movies.add(movie);
 
         movie = new Movie("Matrix Murder");
         movie.setDescription(
-                "In Math class, there is a topic, everyone fears! Only the bravest students will survive. They already fought 2 whole battles. Our fighters heavily injured.\n" +"Watch the last ultimate battle of the last possible examination. Will they fail or will they survive?\n");
+                "In Math class, there is a topic, everyone fears! Only the bravest students will survive. They already fought 2 whole battles. Our fighters heavily injured.\n" + "Watch the last ultimate battle of the last possible examination. Will they fail or will they survive?\n");
         movie.setGenres(Arrays.asList(HORROR, CRIME, ACTION, THRILLER, MYSTERY, DRAMA));
         movies.add(movie);
 
@@ -72,7 +71,7 @@ public class Movie {
 
         movie = new Movie("Oh Campina Campina!");
         movie.setDescription(
-                "Our daily meal as students of FHCW, a mystery. We are visiting the kitchen of Campina for one day. Come and see how we discover and expose all secrets.\n" +"Recipes included!\n");
+                "Our daily meal as students of FHCW, a mystery. We are visiting the kitchen of Campina for one day. Come and see how we discover and expose all secrets.\n" + "Recipes included!\n");
         movie.setGenres(Arrays.asList(MYSTERY, HISTORY, HORROR, DOCUMENTARY));
         movies.add(movie);
 
@@ -97,9 +96,10 @@ public class Movie {
         return movies;
     }
 
-    public static List<Movie> filterAfterGenre(Genre genre){
-        if(genre==ALL){return movies;}
-        else {
+    public static List<Movie> filterAfterGenre(Genre genre) {
+        if (genre == ALL) {
+            return movies;
+        } else {
             List<Movie> filteredMovies = new ArrayList<>();
             for (Movie movie : movies) {
                 if (movie.getGenres().contains(genre)) {
