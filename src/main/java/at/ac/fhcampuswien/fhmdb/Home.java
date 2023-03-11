@@ -1,4 +1,5 @@
 package at.ac.fhcampuswien.fhmdb;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -15,8 +16,10 @@ public class Home extends Application {
         stage.setTitle("MovieCampus");
         stage.setScene(new Scene(root,1215,790));
         stage.setResizable(false);
+        stage.setMaximized(true);
         stage.show();
     }
+
     public static void main(String[] args) {
         launch();
     }
