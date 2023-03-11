@@ -87,6 +87,11 @@ public class Movie {
         movie.setGenres(Arrays.asList(MYSTERY, WESTERN, FAMILY, COMEDY, ADVENTURE));
         movies.add(movie);
 
+        movie = new Movie("Howdy Campus");
+        movie.setDescription(
+                "Explore the Wild West in 'Howdy Campus: Uncovering the Origins of the FH'.\nWitness the struggles of a small group of pioneers wanting to bring education in a land without laws and rules.\nWill they be successful? This captivating documentary is a must-see for anyone who loves history, the Wild West, and the power of knowledge.\"");
+        movie.setGenres(Arrays.asList(DOCUMENTARY,WESTERN,HISTORY));
+
         movie = new Movie("Finishing the race");
         movie.setDescription(
                 "The finish line in vision, only view last miles left. After running for so long the race between students and test are finally to an end. Now the have to face\n" + "their last ultimate enemy. They have to find out if they are up to this task after such long fighting or if they just got exhausted by now? If they are able to\n" + "overtake, what next? What is there after the finishing line, is it even worth it or will there be just another running track till infinity ...\n");
