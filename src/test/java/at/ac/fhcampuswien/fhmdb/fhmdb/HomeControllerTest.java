@@ -6,5 +6,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class HomeControllerTest {
 
+    @Test
+    void if_movie_titles_are_sorted_from_A_Z(){
+
+    }
 
 }
