@@ -76,13 +76,16 @@ public class Movie {
     }
 
     public static List<Movie> filterAfterGenre(Genre genre){
-        List<Movie> filteredMovies = new ArrayList<>();
-        for (Movie movie:movies){
-            if (movie.getGenres().contains(genre)){
-                filteredMovies.add(movie);
+        if(genre==ALL){return movies;}
+        else {
+            List<Movie> filteredMovies = new ArrayList<>();
+            for (Movie movie : movies) {
+                if (movie.getGenres().contains(genre)) {
+                    filteredMovies.add(movie);
+                }
             }
+            return filteredMovies;
         }
-        return filteredMovies;
     }
 }
 
