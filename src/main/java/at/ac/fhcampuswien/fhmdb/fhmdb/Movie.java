@@ -81,7 +81,7 @@ public class Movie {
         movie.setGenres(Arrays.asList(MUSICAL, FAMILY, ADVENTURE));
         movies.add(movie);
 
-        movie = new Movie("Rubber ducks invasion");
+        movie = new Movie("Rubber duck invasion");
         movie.setDescription(
                 "The first rubber duck was found nowhere less special than in David Brek's backpack on his way to a heist. He, most feared leader, and his accomplices\n" + "were the most-wanted criminals in whole Western City. Since that moment, even more and more ducks appeared in their backpacks. No matter how\n" + "much they observed their backpacks, the duck drama didn´t end. If they don´t stop the duck avalanche in time they will be found. The time is ticking.\n");
         movie.setGenres(Arrays.asList(MYSTERY, WESTERN, FAMILY, COMEDY, ADVENTURE));
