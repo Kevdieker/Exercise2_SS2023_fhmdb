@@ -114,5 +114,9 @@ public class Movie {
             return filteredMovies;
         }
     }
+
+    public static List<Movie> getMovies(){
+        return movies;
+    }
 }
 
