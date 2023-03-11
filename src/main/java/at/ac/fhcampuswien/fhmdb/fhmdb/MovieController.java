@@ -7,17 +7,13 @@ public class MovieController {
 
     @FXML
     private Label description;
-
     @FXML
     private Label genres;
-
     @FXML
     private Label title;
-
     public void setData(Movie movie) {
         title.setText(movie.getTitle());
         description.setText(movie.getDescription());
         genres.setText(movie.getGenresInStringFormat());
     }
-
 }

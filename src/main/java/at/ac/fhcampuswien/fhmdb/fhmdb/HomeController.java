@@ -18,7 +18,6 @@ public class HomeController implements Initializable {
     private ComboBox<Genre> genreBox;
     @FXML
     private ComboBox<String> sortBox;
-
     private List<Movie> movies;
 
     @Override
