@@ -15,7 +15,7 @@
             <Insets left="25.0" />
          </padding>
       </Label>
-      <Label fx:id="description" prefHeight="83.0" prefWidth="1200.0" text="2 students, 1 love. Between lectures, exercises and test there is something exciting and new. Our two main character experience the beauty of love. But not &#10;only there are struggles in their new found love, but also they have to face the challenges of studying ...dddddddddddddddddddddddddddddddddddddd&#10;ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd" textFill="WHITE">
+      <Label fx:id="description" prefHeight="83.0" prefWidth="1200.0" text="2 students, 1 love. Between lectures, exercises and test there is something exciting and new. Our two main character experience the beauty of love. But not &#10;only there are struggles in their new found love, but also they have to face the challenges of studying ...dddddddddddddddddddddddddddddddddddddd&#10;dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd" textFill="WHITE">
          <padding>
             <Insets left="25.0" />
          </padding>
