@@ -13,7 +13,7 @@ import java.util.List;
 
 public class MovieTest {
     @Test
-    void list(){
+    void if_movieList_Genre_equals_correctList_Genre(){
         try {
             List<Movie> movieList = new ArrayList<>();
             List<Movie> correctList = new ArrayList<>();
