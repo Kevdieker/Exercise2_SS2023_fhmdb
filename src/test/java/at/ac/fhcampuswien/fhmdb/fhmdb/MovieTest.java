@@ -18,7 +18,6 @@ public class MovieTest {
         Movie movie = new Movie("Matrix");
         List<Movie> movieList = new ArrayList<>();
 
-
         //When
 
         //Then
