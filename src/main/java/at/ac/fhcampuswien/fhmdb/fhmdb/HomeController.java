@@ -30,7 +30,7 @@ public class HomeController implements Initializable {
     }
 
     public void OnActionFilterMovies() {
-        movies = Movie.filterAfterGenre(genreBox.getValue());
+        movies = Movie.filterAfterGenre(genreBox.getValue(),movies);
         loadingMovies(movies);
     }
 

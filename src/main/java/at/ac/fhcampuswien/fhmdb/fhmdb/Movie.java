@@ -96,7 +96,7 @@ public class Movie {
         return movies;
     }
 
-    public static List<Movie> filterAfterGenre(Genre genre) {
+    public static List<Movie> filterAfterGenre(Genre genre, List<Movie> movies) {
         if (genre == ALL) {
             return movies;
         } else {
