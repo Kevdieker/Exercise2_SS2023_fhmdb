@@ -12,7 +12,6 @@ public class Movie {
     private List<Genre> genres;
     private static List<Movie> movies = new ArrayList<>();
 
-
     public Movie(String title) {
         this.title = title;
     }
