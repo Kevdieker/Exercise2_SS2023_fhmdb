@@ -3,7 +3,6 @@ package at.ac.fhcampuswien.fhmdb.fhmdb;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
 import static at.ac.fhcampuswien.fhmdb.fhmdb.Genre.*;
 
 public class Movie {
