@@ -8,9 +8,7 @@ import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class HomeController implements Initializable {
 
@@ -18,21 +16,36 @@ public class HomeController implements Initializable {
     private VBox home;
     @FXML
     private ComboBox<Genre> genreBox;
-    private List<Movie> allMovies;
+    @FXML
+    private ComboBox<String> sortBox;
+
+    private List<Movie> movies;
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         genreBox.getItems().addAll(Genre.values());
-        allMovies = new ArrayList<>(Movie.initializeMovies());
-        loadingMovies(allMovies);
+        sortBox.getItems().addAll("A-Z","Z-A");
+        movies = new ArrayList<>(Movie.initializeMovies());
+        loadingMovies(movies);
     }
-
     public void OnActionFilterMovies(){
-        home.getChildren().clear();
-        loadingMovies(Movie.filterAfterGenre(genreBox.getValue()));
+
+        movies=Movie.filterAfterGenre(genreBox.getValue());
+        loadingMovies(movies);
+    }
+    public void OnActivSortMovies(){
+        if(sortBox.getValue().equals("A-Z")){
+            movies.sort(Comparator.comparing(Movie::getTitle));
+        }
+        else if (sortBox.getValue().equals("Z-A")){
+            movies.sort(Comparator.comparing(Movie::getTitle).reversed());
+        }
+        loadingMovies(movies);
     }
 
     public void loadingMovies(List<Movie> movies){
+        home.getChildren().clear();
         try {
             for (int i = 0; i < movies.size(); i++) {
                 FXMLLoader fxmlLoader = new FXMLLoader();
@@ -46,9 +59,6 @@ public class HomeController implements Initializable {
             throw new RuntimeException(e);
         }
     }
-
-
-
 }
 
 
