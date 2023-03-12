@@ -21,13 +21,11 @@ public class HomeController implements Initializable {
     private ComboBox<String> sortBox;
     @FXML
     private TextField searchField;
-    private final List<Movie> allMovies = new ArrayList<>(Movie.initializeMovies());
-    // if exercise 2 contains adding new movies by GUI this needs to be changed
-    private List<Movie> selectedMovies = allMovies;
-    private List<Movie> filteredMovies = allMovies;
+    private final List<Movie> allMovies = new ArrayList<>(Movie.initializeMovies()); // if exercise 2 contains adding new movies by GUI final needs to be changed
     private List<Movie> searchedMovies = allMovies;
-    private boolean searched = false;
-    private boolean filtered = false;
+    private List<Movie> filteredMovies = allMovies;
+    private List<Movie> combinedSelectedMovies = allMovies;
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -35,48 +33,21 @@ public class HomeController implements Initializable {
         sortBox.getItems().addAll("A-Z", "Z-A");
         loadingMovies(allMovies);
     }
-
     public void OnActionFilterMovies() {
-
-        selectedMovies = searchedMovies;
-        filteredMovies = filterAfterGenre(genreBox.getValue(), selectedMovies);
-        loadingMovies(filteredMovies);
-        selectedMovies = filteredMovies;
-
-
+        filteredMovies = filterAfterGenre(genreBox.getValue(), allMovies);
+        combinedSelectedMovies = intersectingMovies(filteredMovies, searchedMovies);
+        loadingMovies(combinedSelectedMovies);
     }
-
     public void OnActiveSearchMovies() {
-
-            selectedMovies =filteredMovies;
-            searchedMovies = searchAfterString(searchField.getText(), selectedMovies);
-            loadingMovies(searchedMovies);
-            selectedMovies = searchedMovies;
-
+        searchedMovies = searchAfterString(searchField.getText(), allMovies);
+        combinedSelectedMovies = intersectingMovies(filteredMovies, searchedMovies);
+        loadingMovies(combinedSelectedMovies);
     }
-
     public void OnActiveSortMovies() {
-        sortMovies(sortBox.getValue(), selectedMovies);
-        loadingMovies(selectedMovies);
+        sortMovies(sortBox.getValue(), allMovies);
+        sortMovies(sortBox.getValue(), combinedSelectedMovies);
+        loadingMovies(combinedSelectedMovies);
     }
-
-
-    public void loadingMovies(List<Movie> movies) {
-        home.getChildren().clear();
-        try {
-            for (Movie movie : movies) {
-                FXMLLoader fxmlLoader = new FXMLLoader();
-                fxmlLoader.setLocation(getClass().getResource("movie_card.fxml"));
-                VBox movieSpace = fxmlLoader.load();
-                MovieController movieController = fxmlLoader.getController();
-                movieController.setData(movie);
-                home.getChildren().add(movieSpace);
-            }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     public static List<Movie> filterAfterGenre(Genre genre, List<Movie> movies) {
         if (genre == Genre.ALL) {
             return movies;
@@ -90,7 +61,6 @@ public class HomeController implements Initializable {
             return filteredMovies;
         }
     }
-
     public static String makeStringUniform(String polyformString) {
         return polyformString.toLowerCase().trim().replaceAll("\\s", "");
     }
@@ -111,7 +81,6 @@ public class HomeController implements Initializable {
             return filteredMovies;
         }
     }
-
     public static List<Movie> sortMovies(String sortAlgo, List<Movie> movies) {
         if (sortAlgo.equals("A-Z")) {
             movies.sort(Comparator.comparing(Movie::getTitle));
@@ -120,5 +89,24 @@ public class HomeController implements Initializable {
         }
         return movies;
     }
-
+    public static List<Movie> intersectingMovies(List<Movie> list1, List<Movie> list2) {
+        List<Movie> common = new ArrayList<>(list1);
+        common.retainAll(list2);
+        return common;
+    }
+    public void loadingMovies(List<Movie> movies) {
+        home.getChildren().clear();
+        try {
+            for (Movie movie : movies) {
+                FXMLLoader fxmlLoader = new FXMLLoader();
+                fxmlLoader.setLocation(getClass().getResource("movie_card.fxml"));
+                VBox movieSpace = fxmlLoader.load();
+                MovieController movieController = fxmlLoader.getController();
+                movieController.setData(movie);
+                home.getChildren().add(movieSpace);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
