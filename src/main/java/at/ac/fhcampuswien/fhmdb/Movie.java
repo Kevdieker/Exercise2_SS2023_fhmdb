@@ -13,28 +13,36 @@ public class Movie {
     public Movie(String title) {
         this.title = title;
     }
+
     public void setTitle(String title) {
         this.title = title;
     }
+
     public void setDescription(String description) {
         this.description = description;
     }
+
     public void setGenres(List<Genre> genres) {
         this.genres = genres;
     }
+
     public String getTitle() {
         return title;
     }
+
     public String getDescription() {
         return description;
     }
+
     public List<Genre> getGenres() {
         return genres;
     }
+
     public String getGenresInStringFormat() {
         return genres.toString();
     }
-    public static Movie getMovieByTitle(String title){
+
+    public static Movie getMovieByTitle(String title) {
         for (Movie movie : movies) {
             if (movie.getTitle().equals(title)) {
                 return movie;
@@ -43,7 +51,8 @@ public class Movie {
         return null;
 
     }
-    public static List<Movie> getMovies(){
+
+    public static List<Movie> getMovies() {
         return movies;
     }
 
@@ -63,13 +72,13 @@ public class Movie {
 
         movie = new Movie("Operating Systems o´clock");
         movie.setDescription(
-                "It is time for operating systems. Get the laptops out, start the console line and let´s go. Every command will effect something different, every combination\n" +"an individual masterpiece. It is up to the programmer, what he wants to do next. Will all the missing parts be found to succeed? Will all riddles get solved?\n" + "This is an up close movie to the fight of getting all points in the operating system test on Oracle.\n");
+                "It is time for operating systems. Get the laptops out, start the console line and let´s go. Every command will effect something different, every combination\n" + "an individual masterpiece. It is up to the programmer, what he wants to do next. Will all the missing parts be found to succeed? Will all riddles get solved?\n" + "This is an up close movie to the fight of getting all points in the operating system test on Oracle.\n");
         movie.setGenres(Arrays.asList(Genre.ACTION, Genre.ANIMATION, Genre.SCIENCE_FICTION));
         movies.add(movie);
 
         movie = new Movie("Operating Systems o´clock 2");
         movie.setDescription(
-                "They failed. But only so closely. But nevertheless they failed. What do to now? Preparing better, getting better, being better! But will it be enough in the\n" +"end? Or will they have to submit themselves to the powers of the complexity of the operating systems ...\n");
+                "They failed. But only so closely. But nevertheless they failed. What do to now? Preparing better, getting better, being better! But will it be enough in the\n" + "end? Or will they have to submit themselves to the powers of the complexity of the operating systems ...\n");
         movie.setGenres(Arrays.asList(Genre.DRAMA, Genre.ACTION, Genre.ANIMATION, Genre.SCIENCE_FICTION));
         movies.add(movie);
 
@@ -127,5 +136,23 @@ public class Movie {
             return filteredMovies;
         }
     }
-
+    public static List<Movie> searchingMovies(String searchedWord) {
+        searchedWord = makeStringUniform(searchedWord);
+        if (searchedWord.isEmpty()) {
+            return movies;
+        } else {
+            List<Movie> searchedMovies = new ArrayList<>();
+            for (Movie movie : movies) {
+                if (makeStringUniform(movie.description).contains(searchedWord) ||
+                        makeStringUniform(movie.title).contains(searchedWord) ||
+                        makeStringUniform(movie.genres.toString()).contains(searchedWord)) {
+                    searchedMovies.add(movie);
+                }
+            }
+            return searchedMovies;
+        }
+    }
+    public static String makeStringUniform(String polyformString){
+        return polyformString.toLowerCase().trim().replaceAll("\\s", "");
+    }
 }

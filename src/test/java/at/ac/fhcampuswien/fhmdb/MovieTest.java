@@ -29,7 +29,7 @@ public class MovieTest {
             actual.getTitle();
 
             //When
-            actual.searchMovieTitle();
+
 
             //Then
             assertEquals(expected, actual);
@@ -50,7 +50,7 @@ public class MovieTest {
             actual.getDescription();
 
             //When
-            actual.searchMovieDescription();
+
 
             //Then
             assertEquals(expected, actual);

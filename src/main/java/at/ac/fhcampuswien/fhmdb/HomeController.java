@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
@@ -18,6 +19,9 @@ public class HomeController implements Initializable {
     private ComboBox<Genre> genreBox;
     @FXML
     private ComboBox<String> sortBox;
+    @FXML
+    private TextField searchBox;
+
     private List<Movie> movies;
 
     @Override
@@ -40,6 +44,11 @@ public class HomeController implements Initializable {
             movies.sort(Comparator.comparing(Movie::getTitle).reversed());
         }
         loadingMovies(movies);
+    }
+    public void OnActiveSearchMovies(){
+        movies = Movie.searchingMovies(searchBox.getText());
+        loadingMovies(movies);
+
     }
 
     public void loadingMovies(List<Movie> movies) {

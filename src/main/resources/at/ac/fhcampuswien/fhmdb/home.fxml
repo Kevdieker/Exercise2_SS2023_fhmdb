@@ -81,7 +81,7 @@
             </HBox>
             <HBox maxHeight="-Infinity" prefHeight="70.0" prefWidth="338.0">
                <children>
-                  <TextField prefHeight="36.0" prefWidth="236.0" promptText="SEARCH MOVIE ">
+                  <TextField fx:id="searchBox" onAction="#OnActiveSearchMovies" prefHeight="36.0" prefWidth="236.0" promptText="SEARCH MOVIE ">
                      <opaqueInsets>
                         <Insets top="60.0" />
                      </opaqueInsets>
