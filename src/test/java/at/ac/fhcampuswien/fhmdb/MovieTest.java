@@ -20,26 +20,77 @@ public class MovieTest {
 
     //Methods: searchMovieTitle and seachMovieDescription needs to be written in class Movie//
     @Test
-    void check_if_searching_works_with_title(){
+    void check_if_searching_works_with_title_undercase(){
         try {
             //Given
+            Movie given = new Movie("Campus Couple");
             Movie expected = new Movie("Campus Couple");
-            Movie actual = new Movie("Campus Couple");
-            expected.getTitle();
-            actual.getTitle();
 
             //When
-            actual.searchingMovies("Campus");
+            Movie actual = (Movie) given.searchingMovies("campus couple");
 
             //Then
-            assertEquals(expected, actual);
+            assertEquals(expected.getTitle(), actual);
         }catch (Exception e){
             e.printStackTrace();
         }
     }
 
     @Test
-    void check_if_searching_works_with_description(){
+    void check_if_searching_works_with_title_uppercase(){
+        try {
+            //Given
+            Movie given = new Movie("Campus Couple");
+            Movie expected = new Movie("Campus Couple");
+
+            //When
+            Movie actual = (Movie) given.searchingMovies("CAMPUS COUPLE");
+
+            //Then
+            assertEquals(expected.getTitle(), actual);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    void check_if_searching_works_with_title_uppercase_mixed_with_undercase(){
+        try {
+            //Given
+            Movie given = new Movie("Campus Couple");
+            Movie expected = new Movie("Campus Couple");
+
+            //When
+            Movie actual = (Movie) given.searchingMovies("CaMPuS CouPLe");
+
+            //Then
+            assertEquals(expected.getTitle(), actual);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    void check_if_searching_works_with_description_uppercase(){
+        try {
+            //Given
+            Movie given = new Movie("Campus Couple");
+            given.setDescription("2 students, 1 love. Between lectures, exercises and test there is something exciting and new. Our two main character experience the beauty of love. But not only there are struggles in their new found love, but also they have to face the challenges of studying ...");
+            Movie expected = new Movie("Campus Couple");
+            expected.setDescription("2 students, 1 love. Between lectures, exercises and test there is something exciting and new. Our two main character experience the beauty of love. But not only there are struggles in their new found love, but also they have to face the challenges of studying ...");
+
+            //When
+            Movie actual = (Movie) given.searchingMovies("BETWEEN");
+
+            //Then
+            assertEquals(expected.getDescription(), actual);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    void check_if_searching_works_with_description_undercase(){
         try {
             //Given
             Movie expected = new Movie("Campus Couple");
@@ -50,10 +101,49 @@ public class MovieTest {
             actual.getDescription();
 
             //When
-            actual.searchingMovies("Between");
+            actual.searchingMovies("between");
 
             //Then
             assertEquals(expected, actual);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    void check_if_searching_works_with_description_undercase_mixed_uppercase(){
+        try {
+            //Given
+            Movie expected = new Movie("Campus Couple");
+            Movie actual = new Movie("Campus Couple");
+            expected.setDescription("2 students, 1 love. Between lectures, exercises and test there is something exciting and new. Our two main character experience the beauty of love. But not only there are struggles in their new found love, but also they have to face the challenges of studying ...");
+            actual.setDescription("2 students, 1 love. Between lectures, exercises and test there is something exciting and new. Our two main character experience the beauty of love. But not only there are struggles in their new found love, but also they have to face the challenges of studying ...");
+            expected.getDescription();
+            actual.getDescription();
+
+            //When
+            actual.searchingMovies("beTweEN");
+
+            //Then
+            assertEquals(expected, actual);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    void if_searching_works_with_description_written_wrong(){
+        try {
+            //Given
+            Movie actual = new Movie("Campus Couple");
+            actual.setDescription("2 students, 1 love. Between lectures, exercises and test there is something exciting and new. Our two main character experience the beauty of love. But not only there are struggles in their new found love, but also they have to face the challenges of studying ...");
+            actual.getDescription();
+
+            //When
+            actual.searchingMovies("zwischen");
+
+            //Then
+            assertEquals("This movie cannot be found", actual);
         }catch (Exception e){
             e.printStackTrace();
         }
