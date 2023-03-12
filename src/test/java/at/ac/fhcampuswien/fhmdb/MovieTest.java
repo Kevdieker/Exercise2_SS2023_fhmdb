@@ -70,6 +70,22 @@ public class MovieTest {
     }
 
     @Test
+    void if_searching_works_with_title_written_wrong(){
+        try {
+            //Given
+            Movie actual = new Movie("Campus Couple");
+
+            //When
+            actual.searchingMovies("zwischen");
+
+            //Then
+            assertEquals("This movie cannot be found", actual);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    @Test
     void check_if_searching_works_with_description_uppercase(){
         try {
             //Given
