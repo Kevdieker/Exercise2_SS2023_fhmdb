@@ -39,7 +39,12 @@ public class HomeController implements Initializable {
         loadingMovies(combinedSelectedMovies);
     }
     public void OnActiveSearchMovies() {
-        searchedMovies = searchAfterString(searchField, searchField.getText(), allMovies);
+        if (!searchField.getText().isEmpty()) {
+            searchedMovies = searchAfterString(searchField.getText(), allMovies);
+        }
+        else{
+            searchedMovies=filteredMovies;
+        }
         combinedSelectedMovies = intersectingMovies(filteredMovies, searchedMovies);
         loadingMovies(combinedSelectedMovies);
     }
@@ -64,22 +69,17 @@ public class HomeController implements Initializable {
     public static String makeStringUniform(String polyformString) {
         return polyformString.toLowerCase().trim().replaceAll("\\s", "");
     }
-
-    public static List<Movie> searchAfterString(TextField searchField, String searchedWord, List<Movie> movies) {
+    public static List<Movie> searchAfterString(String searchedWord, List<Movie> movies) {
         searchedWord = makeStringUniform(searchedWord);
         List<Movie> searchedMovies = new ArrayList<>();
-        if (!searchField.getText().isEmpty()) {
-            for (Movie movie : movies) {
-                if (makeStringUniform(movie.getTitle()).contains(searchedWord) ||
-                        makeStringUniform(movie.getDescription()).contains(searchedWord) ||
-                        makeStringUniform(movie.getGenresInStringFormat()).contains(searchedWord)) {
-                    searchedMovies.add(movie);
-                }
+        for (Movie movie : movies) {
+            if (makeStringUniform(movie.getTitle()).contains(searchedWord) ||
+                    makeStringUniform(movie.getDescription()).contains(searchedWord) ||
+                    makeStringUniform(movie.getGenresInStringFormat()).contains(searchedWord)) {
+                searchedMovies.add(movie);
             }
-            return searchedMovies;
-        } else {
-            return movies; //vielleicht gehört filteredMovies da hin
         }
+        return searchedMovies;
     }
     public static List<Movie> sortMovies(String sortAlgo, List<Movie> movies) {
         if (sortAlgo.equals("A-Z")) {
