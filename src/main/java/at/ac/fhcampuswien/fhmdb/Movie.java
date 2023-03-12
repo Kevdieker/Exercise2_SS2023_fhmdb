@@ -149,6 +149,7 @@ public class Movie {
                     searchedMovies.add(movie);
                 }
             }
+
             return searchedMovies;
         }
     }
