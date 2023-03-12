@@ -1,18 +1,15 @@
 package at.ac.fhcampuswien.fhmdb;
-
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 
 public class HomeController implements Initializable {
-
     @FXML
     private VBox home;
     @FXML
@@ -26,13 +23,13 @@ public class HomeController implements Initializable {
     private List<Movie> filteredMovies = allMovies;
     private List<Movie> combinedSelectedMovies = allMovies;
 
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         genreBox.getItems().addAll(Genre.values());
         sortBox.getItems().addAll("A-Z", "Z-A");
         loadingMovies(allMovies);
     }
+    // __________________ Node active actions _______________________//
     public void OnActionFilterMovies() {
         filteredMovies = filterAfterGenre(genreBox.getValue(), allMovies);
         combinedSelectedMovies = intersectingMovies(filteredMovies, searchedMovies);
@@ -53,6 +50,8 @@ public class HomeController implements Initializable {
         sortMovies(sortBox.getValue(), combinedSelectedMovies);
         loadingMovies(combinedSelectedMovies);
     }
+
+    // ____________________________ METHODS ________________________________//
     public static List<Movie> filterAfterGenre(Genre genre, List<Movie> movies) {
         if (genre == Genre.ALL) {
             return movies;
@@ -74,8 +73,7 @@ public class HomeController implements Initializable {
         List<Movie> searchedMovies = new ArrayList<>();
         for (Movie movie : movies) {
             if (makeStringUniform(movie.getTitle()).contains(searchedWord) ||
-                    makeStringUniform(movie.getDescription()).contains(searchedWord) ||
-                    makeStringUniform(movie.getGenresInStringFormat()).contains(searchedWord)) {
+                    (movie.getDescription()!=null && makeStringUniform(movie.getDescription()).contains(searchedWord))){
                 searchedMovies.add(movie);
             }
         }
@@ -94,6 +92,8 @@ public class HomeController implements Initializable {
         common.retainAll(list2);
         return common;
     }
+
+    // ____________________________ LOADING SCREEN ________________________________//
     public void loadingMovies(List<Movie> movies) {
         home.getChildren().clear();
         try {

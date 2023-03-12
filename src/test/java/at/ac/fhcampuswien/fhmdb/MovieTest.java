@@ -11,16 +11,4 @@ public class MovieTest {
         //Then
         assertFalse(movieList.isEmpty());
     }
-    /*
-    @Test
-    void initialized_movielist_contains_a_specific_movie(){
-        //Given
-        String movie = "he";
-        //When
-        List<Movie> movieList = Movie.initializeMovies();
-        String movies =movieList.toString();
-        //Then
-        assertTrue(movies.contains(movie));
-    }
-    */
 }
