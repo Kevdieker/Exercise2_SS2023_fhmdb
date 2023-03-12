@@ -28,6 +28,7 @@ public class MovieTest {
             expected.getTitle();
             actual.getTitle();
 
+
             //When
 
 
