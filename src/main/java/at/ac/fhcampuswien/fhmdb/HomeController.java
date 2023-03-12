@@ -39,7 +39,7 @@ public class HomeController implements Initializable {
         loadingMovies(combinedSelectedMovies);
     }
     public void OnActiveSearchMovies() {
-        searchedMovies = searchAfterString(searchField.getText(), allMovies);
+        searchedMovies = searchAfterString(searchField, searchField.getText(), allMovies);
         combinedSelectedMovies = intersectingMovies(filteredMovies, searchedMovies);
         loadingMovies(combinedSelectedMovies);
     }
@@ -65,7 +65,7 @@ public class HomeController implements Initializable {
         return polyformString.toLowerCase().trim().replaceAll("\\s", "");
     }
 
-    public List<Movie> searchAfterString(String searchedWord, List<Movie> movies) {
+    public static List<Movie> searchAfterString(TextField searchField, String searchedWord, List<Movie> movies) {
         searchedWord = makeStringUniform(searchedWord);
         List<Movie> searchedMovies = new ArrayList<>();
         if (!searchField.getText().isEmpty()) {
@@ -78,7 +78,7 @@ public class HomeController implements Initializable {
             }
             return searchedMovies;
         } else {
-            return filteredMovies;
+            return movies; //vielleicht gehört filteredMovies da hin
         }
     }
     public static List<Movie> sortMovies(String sortAlgo, List<Movie> movies) {
