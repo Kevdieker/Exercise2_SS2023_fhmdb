@@ -18,7 +18,7 @@ public class HomeController implements Initializable {
     private ComboBox<String> sortBox;
     @FXML
     private TextField searchField;
-    private final List<Movie> allMovies = new ArrayList<>(Movie.initializeMovies()); // if exercise 2 contains adding new movies by GUI final needs to be changed
+    private List<Movie> allMovies = new ArrayList<>(Movie.initializeMovies());
     private List<Movie> searchedMovies = allMovies;
     private List<Movie> filteredMovies = allMovies;
     private List<Movie> combinedSelectedMovies = allMovies;
@@ -46,8 +46,8 @@ public class HomeController implements Initializable {
         loadingMovies(combinedSelectedMovies);
     }
     public void OnActiveSortMovies() {
-        sortMovies(sortBox.getValue(), allMovies);
-        sortMovies(sortBox.getValue(), combinedSelectedMovies);
+        allMovies=sortMovies(sortBox.getValue(), allMovies);
+        combinedSelectedMovies=sortMovies(sortBox.getValue(), combinedSelectedMovies);
         loadingMovies(combinedSelectedMovies);
     }
 
