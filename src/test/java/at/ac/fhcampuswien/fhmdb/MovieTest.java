@@ -17,6 +17,47 @@ public class MovieTest {
         //Then
         assertFalse(Movie.getMovies().isEmpty());
     }
+
+    //Methods: searchMovieTitle and seachMovieDescription needs to be written in class Movie//
+    @Test
+    void check_if_searching_works_with_title(){
+        try {
+            //Given
+            Movie expected = new Movie("Campus Couple");
+            Movie actual = new Movie("Campus Couple");
+            expected.getTitle();
+            actual.getTitle();
+
+            //When
+            actual.searchMovieTitle();
+
+            //Then
+            assertEquals(expected, actual);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    void check_if_searching_works_with_description(){
+        try {
+            //Given
+            Movie expected = new Movie("Campus Couple");
+            Movie actual = new Movie("Campus Couple");
+            expected.setDescription("2 students, 1 love. Between lectures, exercises and test there is something exciting and new. Our two main character experience the beauty of love. But not only there are struggles in their new found love, but also they have to face the challenges of studying ...");
+            actual.setDescription("2 students, 1 love. Between lectures, exercises and test there is something exciting and new. Our two main character experience the beauty of love. But not only there are struggles in their new found love, but also they have to face the challenges of studying ...");
+            expected.getDescription();
+            actual.getDescription();
+
+            //When
+            actual.searchMovieDescription();
+
+            //Then
+            assertEquals(expected, actual);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 /*
     @Test
     void see_if_sport_movies_is_filtered_correctly(){
