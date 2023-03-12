@@ -29,7 +29,7 @@ public class MovieTest {
             actual.getTitle();
 
             //When
-            actual.searchMovieTitle();
+            actual.searchingMovies("Campus");
 
             //Then
             assertEquals(expected, actual);
@@ -50,7 +50,7 @@ public class MovieTest {
             actual.getDescription();
 
             //When
-            actual.searchMovieDescription();
+            actual.searchingMovies("Between");
 
             //Then
             assertEquals(expected, actual);
@@ -58,7 +58,7 @@ public class MovieTest {
             e.printStackTrace();
         }
     }
-/*
+
     @Test
     void see_if_sport_movies_is_filtered_correctly(){
 
