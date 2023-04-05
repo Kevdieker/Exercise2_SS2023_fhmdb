@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
@@ -23,13 +24,33 @@
             <Font size="17.0" />
          </font>
       </Label>
-      <Label fx:id="genres" prefHeight="50.0" prefWidth="1046.0" text="ROMANCE, WAR, DRAMA, COMEDY" textAlignment="RIGHT" textFill="#b4ff12">
-         <font>
-            <Font name="Calibri Light" size="25.0" />
-         </font>
-         <padding>
-            <Insets left="25.0" top="15.0" />
-         </padding>
-      </Label>
+      <HBox prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <Label fx:id="genres" prefHeight="50.0" prefWidth="926.0" text="ROMANCE, WAR, DRAMA, COMEDY" textAlignment="RIGHT" textFill="#b4ff12">
+               <font>
+                  <Font name="Calibri Light" size="25.0" />
+               </font>
+               <padding>
+                  <Insets left="25.0" top="15.0" />
+               </padding>
+            </Label>
+            <Label fx:id="releaseYear" alignment="BOTTOM_RIGHT" contentDisplay="RIGHT" prefHeight="38.0" prefWidth="226.0" text="Release Year: 2022" textAlignment="RIGHT" textFill="WHITE">
+               <font>
+                  <Font size="15.0" />
+               </font>
+               <HBox.margin>
+                  <Insets top="20.0" />
+               </HBox.margin>
+            </Label>
+            <Label fx:id="rating" alignment="BOTTOM_RIGHT" contentDisplay="RIGHT" prefHeight="38.0" prefWidth="144.0" text="Rating: 10.0" textAlignment="RIGHT" textFill="WHITE">
+               <font>
+                  <Font size="15.0" />
+               </font>
+               <HBox.margin>
+                  <Insets right="32.0" top="20.0" />
+               </HBox.margin>
+            </Label>
+         </children>
+      </HBox>
    </children>
 </VBox>
