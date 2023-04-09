@@ -8,6 +8,8 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.Objects;
 
+import static at.ac.fhcampuswien.fhmdb.Movie.*;
+
 public class Home extends Application {
     @Override
     public void start(Stage stage) throws IOException {
@@ -17,7 +19,13 @@ public class Home extends Application {
         stage.setResizable(false);
         stage.show();
     }
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+
+        //System.out.println(gettingJsontoString());
+       // System.out.println(gettingJsontoString());
+        //System.out.println(gettingMovietoJsonString());
+        //initializeMovies2(gettingMovietoJsonString());
+        //initializeMovies2(gettingJsontoString());
         launch();
     }
 }

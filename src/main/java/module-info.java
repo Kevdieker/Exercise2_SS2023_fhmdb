@@ -1,8 +1,10 @@
-module at.ac.fhcampuswien.fhmdb.fhmdb {
+module at.ac.fhcampuswien.fhmdb{
     requires javafx.controls;
     requires javafx.fxml;
+    requires com.google.gson;
+    requires okhttp;
 
+    opens at.ac.fhcampuswien.fhmdb to javafx.fxml,com.google.gson;
 
-    opens at.ac.fhcampuswien.fhmdb to javafx.fxml;
     exports at.ac.fhcampuswien.fhmdb;
 }
