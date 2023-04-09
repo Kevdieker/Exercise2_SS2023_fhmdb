@@ -4,6 +4,10 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Movie {
+    private String id;
+    private String imgUrl;
+    private int lengthInMinutes;
+    private List<String> writers;
     private String title;
     private String description;
     private List<Genre> genres = new ArrayList<>();
@@ -13,6 +17,37 @@ public class Movie {
     private List<String> director = new ArrayList<>();
 
     //_________________________ GETTER & SETTER ______________________//
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+    public void setDirector(List<String> director) {
+        this.director = director;
+    }
+    public String getId() {
+        return id;
+    }
+    public void setId(String id) {
+        this.id = id;
+    }
+    public String getImgUrl() {
+        return imgUrl;
+    }
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
+    }
+    public int getLengthInMinutes() {
+        return lengthInMinutes;
+    }
+    public void setLengthInMinutes(int lengthInMinutes) {
+        this.lengthInMinutes = lengthInMinutes;
+    }
+    public List<String> getWriters() {
+        return writers;
+    }
+    public void setWriters(List<String> writers) {
+        this.writers = writers;
+    }
     public Movie(String title) {this.title = title;}
     public void setDescription(String description) {this.description = description;}
     public void addGenre(Genre genre) {this.genres.add(genre);}

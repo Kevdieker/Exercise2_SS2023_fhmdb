@@ -1,5 +1,6 @@
 package at.ac.fhcampuswien.fhmdb;
 
+import at.ac.fhcampuswien.fhmdb.models.MovieAPI;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -25,12 +26,12 @@ public class HomeController implements Initializable {
     private ComboBox<String> sortBox;
     @FXML
     private TextField searchField;
-    private List<Movie> allMovies = new ArrayList<>(Movie.initializeMovies());
+    //private List<Movie> allMovies = new ArrayList<>(Movie.initializeMovies());
+    private List<Movie> allMovies = new ArrayList<>(MovieAPI.getAllMovies());
     private List<Movie> searchedMovies = allMovies;
     private List<Movie> filteredMoviesAfterGenre = allMovies;
     private List<Movie> filteredMoviesAfterRating = allMovies;
     private List<Movie> filteredMoviesAfterYear = allMovies;
-
     private List<Movie> combinedSelectedMovies = allMovies;
 
     @Override
