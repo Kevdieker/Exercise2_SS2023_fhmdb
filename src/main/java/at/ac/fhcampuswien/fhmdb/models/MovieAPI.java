@@ -51,7 +51,6 @@ public class MovieAPI{
         }catch(Exception e){
             System.err.println(e.getMessage());
         }
-
         return new ArrayList<>();
     }
 
