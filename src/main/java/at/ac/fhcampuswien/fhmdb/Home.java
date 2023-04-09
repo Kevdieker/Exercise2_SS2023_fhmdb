@@ -20,6 +20,7 @@ public class Home extends Application {
         stage.setScene(new Scene(root,1215,790));
         stage.setResizable(false);
         stage.show();
+
     }
     public static void main(String[] args) throws IOException {
 
