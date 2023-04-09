@@ -1,7 +1,10 @@
-package at.ac.fhcampuswien.fhmdb;
+package at.ac.fhcampuswien.fhmdb.models;
 
+import at.ac.fhcampuswien.fhmdb.Genre;
+import at.ac.fhcampuswien.fhmdb.Movie;
 import okhttp3.*;
 import com.google.gson.Gson;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -31,29 +34,28 @@ public class MovieAPI{
         }
         return url.toString();
     }
-
     static OkHttpClient client = new OkHttpClient();
 
-    public static List<Movie> run() throws Exception {
-        return run(null,null,null,null);
-    }
-    public static List<Movie> run(String query, Genre genre, String releaseYear, String ratingFrom) {
+    public static List<Movie> getAllMovies(String query, Genre genre, String releaseYear, String ratingFrom) {
+
         String url = urlBuilder(query, genre, releaseYear, ratingFrom);
+
         Request request = new Request.Builder()
                 .url(url)
                 .removeHeader("User-Agent")
                 .addHeader("User-Agent","http-agent")
                 .build();
+
         try(Response response = client.newCall(request).execute()) {
             Gson gson = new Gson();
             Movie[] movie = gson.fromJson(response.body().string(), Movie[].class);
             return Arrays.asList(movie);
+
         }catch(Exception e){
-            System.out.println(e.getMessage());
+            System.err.println(e.getMessage());
         }
+
         return new ArrayList<>();
     }
-    public static void main(String[] args) {
-        System.out.println(run("this",Genre.ACTION,"2020","9.0"));
-    }
+
 }
