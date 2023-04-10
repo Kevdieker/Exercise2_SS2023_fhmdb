@@ -15,10 +15,25 @@ public class Movie {
     private List<Genre> genres = new ArrayList<>();
     private double rating;
     private int releaseYear;
-    private List<String> mainCast =new ArrayList<>(); //are the actors
+    private List<String> mainCast = new ArrayList<>(); //are the actors
     private List<String> director = new ArrayList<>();
 
+    public Movie(String id, String imgUrl, int lengthInMinutes, List<String> writers, String title, String description, List<Genre> genres, double rating, int releaseYear, List<String> mainCast, List<String> director) {
+        this.id = id;
+        this.imgUrl = imgUrl;
+        this.lengthInMinutes = lengthInMinutes;
+        this.writers = writers;
+        this.title = title;
+        this.description = description;
+        this.genres = genres;
+        this.rating = rating;
+        this.releaseYear = releaseYear;
+        this.mainCast = mainCast;
+        this.director = director;
+    }
+
     //_________________________ GETTER & SETTER ______________________//
+
 
     public void setTitle(String title) {
         this.title = title;
@@ -68,10 +83,11 @@ public class Movie {
     public void addDirector(String director) {this.director.add(director);}
     public List<String> getDirector() {return director;}
 
+
     //_________________________ METHODS ______________________//
     public static List<Movie> initializeMovies() { //adds example movies to a list and returns it
         List<Movie> movies = new ArrayList<>();
-        Movie movie = new Movie("Campus Couple Love Story");
+       Movie movie = new Movie("Campus Couple Love Story");
         movie.setDescription("2 students, 1 love. Between lectures, exercises and test there is something exciting and new. Our two main character experience the beauty of love. But not \n" + "only there are struggles in their new found love, but also they have to face the challenges of studying ...\n");
         movie.setGenres(Arrays.asList(Genre.ROMANCE, Genre.WAR, Genre.DRAMA, Genre.COMEDY));
         movie.setRating(10.0);
@@ -144,5 +160,8 @@ public class Movie {
         movie.setDirector(List.of("Director3"));
         movies.add(movie);
         return movies;
+
+
     }
+
 }

@@ -2,12 +2,15 @@ package at.ac.fhcampuswien.fhmdb.models;
 
 import at.ac.fhcampuswien.fhmdb.Genre;
 import at.ac.fhcampuswien.fhmdb.Movie;
+import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 import okhttp3.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
 
 public class MovieAPI{
 
@@ -45,6 +48,7 @@ public class MovieAPI{
                 .url(url)
                 .build();
         try(Response response = client.newCall(request).execute()) {
+            //List<Movie> movies = new Gson().fromJson(response.body().string(),new TypeToken<List<Movie>>(){}.getType());
             List<Movie> movies = Arrays.asList(new GsonBuilder().create().fromJson(response.body().string(), Movie[].class));
             return movies;
 
