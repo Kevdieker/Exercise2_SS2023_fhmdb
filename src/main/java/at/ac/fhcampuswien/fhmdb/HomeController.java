@@ -11,6 +11,7 @@ import javafx.scene.layout.VBox;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class HomeController implements Initializable {
@@ -162,6 +163,34 @@ public class HomeController implements Initializable {
     //NEW METHODS
     //should be implemented with Streams!!!!!!!!!!!
 
+    public static String getMostPopularActor(List<Movie> movies) {
+        return movies.stream()
+                .flatMap(movie -> movie.getMainCast().stream())
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()))
+                .entrySet()
+                .stream()
+                .max(Map.Entry.comparingByValue())
+                .map(Map.Entry::getKey)
+                .orElse(null);
+    }
+    public static int getLongestMovieTitle(List<Movie> movies) {
+        return movies.stream()
+                .mapToInt(movie -> movie.getTitle().length())
+                .max()
+                .orElse(0);
+    }
+    public static long countMoviesFrom(List<Movie> movies, String director) {
+        return movies.stream()
+                .filter(movie -> movie.getDirector().equals(director))
+                .count();
+    }
+    public static List<Movie> getMoviesBetweenYears(List<Movie> movies, int startYear, int endYear) {
+        return movies.stream()
+                .filter(movie -> movie.getReleaseYear()>= startYear && movie.getReleaseYear() <= endYear)
+                .collect(Collectors.toList());
+    }
+
+    /*
     public String getMostPopularActor(List<Movie> movies){  //gibt jene Person zurück, die am öftesten im mainCast der übergebenen Filme vorkommt.
         Collection<String> collection = new ArrayList<>();
         for (Movie movie : movies) {
@@ -198,7 +227,7 @@ public class HomeController implements Initializable {
         return count;
     }
 
-     */
+
     public List<Movie> getMoviesBetweenYears(List<Movie> movies, int startYear, int endYear){ //gibt jene Filme zurück, die zwischen zwei gegebenen Jahren veröffentlicht wurden.
         List<Movie> newFilteredList = new ArrayList<>();
         for (Movie movie : movies) {
@@ -207,8 +236,7 @@ public class HomeController implements Initializable {
             }
         }
         return newFilteredList;
-    }
-
+    }*/
 
     // ____________________________ LOADING SCREEN ________________________________//
     public void loadingMovies(List<Movie> movies) {
@@ -228,9 +256,9 @@ public class HomeController implements Initializable {
 
         //Just to see if the above implemented Methods do what they should
         System.out.println("most Popular Actors = " + getMostPopularActor(movies));
-        //System.out.println("longest title character count = " + getLongestMovieTitle(movies));
+        System.out.println("longest title character count = " + getLongestMovieTitle(movies));
         //mit random Paramentern
-        //System.out.println("count Movies from Director1 = " + countMoviesFrom(movies, "Director1"));
-        System.out.println("Movies zwischen 2015 und 2023 = " + getMoviesBetweenYears(movies, 2015, 2023));
+        System.out.println("count Movies from Director1 = " + countMoviesFrom(movies, "Francis Ford Coppola"));
+        System.out.println("Movies zwischen 1972 und 1980 = " + getMoviesBetweenYears(movies, 1972, 1980));
     }
 }
