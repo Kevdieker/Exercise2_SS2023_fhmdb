@@ -50,21 +50,23 @@ public class HomeController implements Initializable {
     public void OnActionFilterMovies() {
         filteredMoviesAfterGenre = filterAfterGenre(genreBox.getValue(), allMovies);
         combinedSelectedMovies = intersectingMovies(filteredMoviesAfterGenre, searchedMovies);              //nicht gut implementiert
-        combinedSelectedMovies = intersectingMovies(combinedSelectedMovies,filteredMoviesAfterRating);
+        combinedSelectedMovies = intersectingMovies(combinedSelectedMovies, filteredMoviesAfterRating);
         combinedSelectedMovies = intersectingMovies(combinedSelectedMovies, filteredMoviesAfterYear);
         loadingMovies(combinedSelectedMovies);
     }
+
     public void OnActionFilterMoviesAfterYear() {
         filteredMoviesAfterYear = filterAfterReleaseYear(yearBox.getValue(), allMovies);
         combinedSelectedMovies = intersectingMovies(filteredMoviesAfterYear, searchedMovies);              //nicht gut implementiert
-        combinedSelectedMovies = intersectingMovies(combinedSelectedMovies,filteredMoviesAfterRating);
+        combinedSelectedMovies = intersectingMovies(combinedSelectedMovies, filteredMoviesAfterRating);
         combinedSelectedMovies = intersectingMovies(combinedSelectedMovies, filteredMoviesAfterGenre);
         loadingMovies(combinedSelectedMovies);
     }
+
     public void OnActionFilterMoviesAfterRating() {
         filteredMoviesAfterRating = filterAfterRating(ratingBox.getValue(), allMovies);
         combinedSelectedMovies = intersectingMovies(filteredMoviesAfterRating, searchedMovies);              //nicht gut implementiert
-        combinedSelectedMovies = intersectingMovies(combinedSelectedMovies,filteredMoviesAfterYear);
+        combinedSelectedMovies = intersectingMovies(combinedSelectedMovies, filteredMoviesAfterYear);
         combinedSelectedMovies = intersectingMovies(combinedSelectedMovies, filteredMoviesAfterGenre);
         loadingMovies(combinedSelectedMovies);
     }
@@ -76,7 +78,7 @@ public class HomeController implements Initializable {
             searchedMovies = filteredMoviesAfterGenre;
         }
         combinedSelectedMovies = intersectingMovies(filteredMoviesAfterGenre, searchedMovies);
-        combinedSelectedMovies = intersectingMovies(combinedSelectedMovies,filteredMoviesAfterRating);
+        combinedSelectedMovies = intersectingMovies(combinedSelectedMovies, filteredMoviesAfterRating);
         combinedSelectedMovies = intersectingMovies(combinedSelectedMovies, filteredMoviesAfterYear);
         loadingMovies(combinedSelectedMovies);
     }
@@ -127,6 +129,7 @@ public class HomeController implements Initializable {
         }
         return movies;
     }
+
     //NEW METHODS
     public static List<Movie> filterAfterRating(Object rating, List<Movie> movies) {
         if (rating == "no filter") {
@@ -134,27 +137,29 @@ public class HomeController implements Initializable {
         } else {
             List<Movie> filteredMovies = new ArrayList<>();
             for (Movie movie : movies) {
-                if ((int)movie.getRating()==(int)rating) {
+                if ((int) movie.getRating() == (int) rating) {
                     filteredMovies.add(movie);
                 }
             }
             return filteredMovies;
         }
     }
+
     public static List<Movie> filterAfterReleaseYear(Object releaseYear, List<Movie> movies) {
         if (releaseYear == "no filter") {
             return movies;
         } else {
             List<Movie> filteredMovies = new ArrayList<>();
-            releaseYear=(int)releaseYear/10;
+            releaseYear = (int) releaseYear / 10;
             for (Movie movie : movies) {
-                if (movie.getReleaseYear()/10==(int)releaseYear) {
+                if (movie.getReleaseYear() / 10 == (int) releaseYear) {
                     filteredMovies.add(movie);
                 }
             }
             return filteredMovies;
         }
     }
+
     public static List<Movie> intersectingMovies(List<Movie> list1, List<Movie> list2) {
         List<Movie> common = new ArrayList<>(list1);
         common.retainAll(list2);
@@ -165,15 +170,15 @@ public class HomeController implements Initializable {
     //NEW METHODS
     //should be implemented with Streams!!!!!!!!!!!
 
-    public static String getMostPopularActor(List<Movie> movies){  //gibt jene Person zurück, die am öftesten im mainCast der übergebenen Filme vorkommt.
+    public static String getMostPopularActor(List<Movie> movies) {  //gibt jene Person zurück, die am öftesten im mainCast der übergebenen Filme vorkommt.
 
-       return movies.stream()
-               .flatMap(movie -> movie.getMainCast().stream())
-               .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()))
-               .entrySet().stream()
-               .max(Map.Entry.comparingByValue())
-               .map(Map.Entry::getKey)
-               .orElse(null);
+        return movies.stream()
+                .flatMap(movie -> movie.getMainCast().stream())
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()))
+                .entrySet().stream()
+                .max(Map.Entry.comparingByValue())
+                .map(Map.Entry::getKey)
+                .orElse(null);
 /*
         if(movies.isEmpty())return null;
 
@@ -191,6 +196,7 @@ public class HomeController implements Initializable {
         return mostCommonElement;*/
 
     }
+
     public static int getLongestMovieTitle(List<Movie> movies) {   //filtert auf den längsten Filmtitel der übergebenen Filme und gibt die Anzahl der Buchstaben des Titels zurück
         return movies.stream()
                 .map(Movie::getTitle)
@@ -207,7 +213,8 @@ public class HomeController implements Initializable {
         */
 
     }
-    public static long countMoviesFrom(List<Movie> movies, String director){ //gibt die Anzahl der Filme eines bestimmten Regisseurs zurück.
+
+    public static long countMoviesFrom(List<Movie> movies, String director) { //gibt die Anzahl der Filme eines bestimmten Regisseurs zurück.
 
         return movies.stream()
                 .flatMap(movie -> movie.getDirectors().stream())
@@ -225,10 +232,11 @@ public class HomeController implements Initializable {
         }
         return count;*/
     }
-    public static List<Movie> getMoviesBetweenYears(List<Movie> movies, int startYear, int endYear){ //gibt jene Filme zurück, die zwischen zwei gegebenen Jahren veröffentlicht wurden.
+
+    public static List<Movie> getMoviesBetweenYears(List<Movie> movies, int startYear, int endYear) { //gibt jene Filme zurück, die zwischen zwei gegebenen Jahren veröffentlicht wurden.
 
         return movies.stream()
-                .filter(movie -> movie.getReleaseYear()>startYear&& movie.getReleaseYear()<endYear)
+                .filter(movie -> movie.getReleaseYear() > startYear && movie.getReleaseYear() < endYear)
                 .toList();
 
      /*

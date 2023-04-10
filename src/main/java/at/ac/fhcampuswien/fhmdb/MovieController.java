@@ -16,29 +16,12 @@ public class MovieController {
     private Label rating;
     @FXML
     private Label title;
+
     public void setData(Movie movie) {
         title.setText(movie.getTitle());
         description.setText(movie.getDescription());
         genres.setText(movie.getGenresInStringFormat());
         releaseYear.setText("Release Year: " + String.valueOf(movie.getReleaseYear()));
         rating.setText("Rating: " + String.valueOf(movie.getRating()));
-    }
-
-    public static int getLongestMovieTitle(List<Movie> movies) {
-        return movies.stream()
-                .map(Movie::getTitle)
-                .mapToInt(String::length)
-                .max()
-                .orElse(0);
-    }
-    public static long countMoviesFrom(List<Movie> movies, String directors) {
-        return movies.stream()
-                .filter(movie -> movie.getDirectors().equals(directors))
-                .count();
-    }
-    public static List<Movie> getMoviesBetweenYears(List<Movie> movies, int startYear, int endYear) {
-        return movies.stream()
-                .filter(movie -> movie.getReleaseYear() >= startYear && movie.getReleaseYear() <= endYear)
-                .collect(Collectors.toList());
     }
 }
