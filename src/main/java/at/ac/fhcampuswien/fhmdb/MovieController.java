@@ -19,5 +19,6 @@ public class MovieController {
         genres.setText(movie.getGenresInStringFormat());
         releaseYear.setText("Release Year: " + String.valueOf(movie.getReleaseYear()));
         rating.setText("Rating: " + String.valueOf(movie.getRating()));
+
     }
 }

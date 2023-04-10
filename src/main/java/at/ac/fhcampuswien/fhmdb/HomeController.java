@@ -11,7 +11,10 @@ import javafx.scene.layout.VBox;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
+
+import static java.lang.System.*;
 
 public class HomeController implements Initializable {
     @FXML
@@ -47,21 +50,23 @@ public class HomeController implements Initializable {
     public void OnActionFilterMovies() {
         filteredMoviesAfterGenre = filterAfterGenre(genreBox.getValue(), allMovies);
         combinedSelectedMovies = intersectingMovies(filteredMoviesAfterGenre, searchedMovies);              //nicht gut implementiert
-        combinedSelectedMovies = intersectingMovies(combinedSelectedMovies,filteredMoviesAfterRating);
+        combinedSelectedMovies = intersectingMovies(combinedSelectedMovies, filteredMoviesAfterRating);
         combinedSelectedMovies = intersectingMovies(combinedSelectedMovies, filteredMoviesAfterYear);
         loadingMovies(combinedSelectedMovies);
     }
+
     public void OnActionFilterMoviesAfterYear() {
         filteredMoviesAfterYear = filterAfterReleaseYear(yearBox.getValue(), allMovies);
         combinedSelectedMovies = intersectingMovies(filteredMoviesAfterYear, searchedMovies);              //nicht gut implementiert
-        combinedSelectedMovies = intersectingMovies(combinedSelectedMovies,filteredMoviesAfterRating);
+        combinedSelectedMovies = intersectingMovies(combinedSelectedMovies, filteredMoviesAfterRating);
         combinedSelectedMovies = intersectingMovies(combinedSelectedMovies, filteredMoviesAfterGenre);
         loadingMovies(combinedSelectedMovies);
     }
+
     public void OnActionFilterMoviesAfterRating() {
         filteredMoviesAfterRating = filterAfterRating(ratingBox.getValue(), allMovies);
         combinedSelectedMovies = intersectingMovies(filteredMoviesAfterRating, searchedMovies);              //nicht gut implementiert
-        combinedSelectedMovies = intersectingMovies(combinedSelectedMovies,filteredMoviesAfterYear);
+        combinedSelectedMovies = intersectingMovies(combinedSelectedMovies, filteredMoviesAfterYear);
         combinedSelectedMovies = intersectingMovies(combinedSelectedMovies, filteredMoviesAfterGenre);
         loadingMovies(combinedSelectedMovies);
     }
@@ -73,7 +78,7 @@ public class HomeController implements Initializable {
             searchedMovies = filteredMoviesAfterGenre;
         }
         combinedSelectedMovies = intersectingMovies(filteredMoviesAfterGenre, searchedMovies);
-        combinedSelectedMovies = intersectingMovies(combinedSelectedMovies,filteredMoviesAfterRating);
+        combinedSelectedMovies = intersectingMovies(combinedSelectedMovies, filteredMoviesAfterRating);
         combinedSelectedMovies = intersectingMovies(combinedSelectedMovies, filteredMoviesAfterYear);
         loadingMovies(combinedSelectedMovies);
     }
@@ -124,6 +129,7 @@ public class HomeController implements Initializable {
         }
         return movies;
     }
+
     //NEW METHODS
     public static List<Movie> filterAfterRating(Object rating, List<Movie> movies) {
         if (rating == "no filter") {
@@ -131,27 +137,29 @@ public class HomeController implements Initializable {
         } else {
             List<Movie> filteredMovies = new ArrayList<>();
             for (Movie movie : movies) {
-                if ((int)movie.getRating()==(int)rating) {
+                if ((int) movie.getRating() == (int) rating) {
                     filteredMovies.add(movie);
                 }
             }
             return filteredMovies;
         }
     }
+
     public static List<Movie> filterAfterReleaseYear(Object releaseYear, List<Movie> movies) {
         if (releaseYear == "no filter") {
             return movies;
         } else {
             List<Movie> filteredMovies = new ArrayList<>();
-            releaseYear=(int)releaseYear/10;
+            releaseYear = (int) releaseYear / 10;
             for (Movie movie : movies) {
-                if (movie.getReleaseYear()/10==(int)releaseYear) {
+                if (movie.getReleaseYear() / 10 == (int) releaseYear) {
                     filteredMovies.add(movie);
                 }
             }
             return filteredMovies;
         }
     }
+
     public static List<Movie> intersectingMovies(List<Movie> list1, List<Movie> list2) {
         List<Movie> common = new ArrayList<>(list1);
         common.retainAll(list2);
@@ -162,7 +170,18 @@ public class HomeController implements Initializable {
     //NEW METHODS
     //should be implemented with Streams!!!!!!!!!!!
 
-    public String getMostPopularActor(List<Movie> movies){  //gibt jene Person zurück, die am öftesten im mainCast der übergebenen Filme vorkommt.
+    /*public static String getMostPopularActor(List<Movie> movies){  //gibt jene Person zurück, die am öftesten im mainCast der übergebenen Filme vorkommt.
+    /*public static String getMostPopularActor(List<Movie> movies) {  //gibt jene Person zurück, die am öftesten im mainCast der übergebenen Filme vorkommt.
+
+        return movies.stream()
+                .flatMap(movie -> movie.getMainCast().stream())
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()))
+                .entrySet().stream()
+                .max(Map.Entry.comparingByValue())
+                .map(Map.Entry::getKey)
+                .orElse(null);
+        if(movies.isEmpty())return null;
+
         Collection<String> collection = new ArrayList<>();
         for (Movie movie : movies) {
             String stringOfAllActors = null;
@@ -177,8 +196,18 @@ public class HomeController implements Initializable {
         return mostCommonElement;
     }
     public int getLongestMovieTitle(List<Movie> movies) {   //filtert auf den längsten Filmtitel der übergebenen Filme und gibt die Anzahl der Buchstaben des Titels zurück
+        return mostCommonElement;*/
 
-        String longestElement = "";
+
+     /*   String longestElement = "";
+
+    /*public static int getLongestMovieTitle(List<Movie> movies) {   //filtert auf den längsten Filmtitel der übergebenen Filme und gibt die Anzahl der Buchstaben des Titels zurück
+        return movies.stream()
+                .map(Movie::getTitle)
+                .max(Comparator.comparing(String::length))
+                .orElse("").length();
+
+       /* String longestElement = "";
         for (Movie movie : movies) {
             if (movie.getTitle().length() > longestElement.length()) {
                 longestElement = movie.getTitle();
@@ -188,6 +217,56 @@ public class HomeController implements Initializable {
     }
     public long countMoviesFrom(List<Movie> movies, String director){ //gibt die Anzahl der Filme eines bestimmten Regisseurs zurück.
         int count =0;
+        */
+
+
+    public static String getMostPopularActor(List<Movie> movies) {
+        return movies.stream()
+                .flatMap(movie -> movie.getMainCast().stream())
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()))
+                .entrySet()
+                .stream()
+                .max(Map.Entry.comparingByValue())
+                .map(Map.Entry::getKey)
+                .orElse(null);
+    }
+
+    public static int getLongestMovieTitle(List<Movie> movies) {
+        return movies.stream()
+                .mapToInt(movie -> movie.getTitle().length())
+                .max()
+                .orElse(0);
+    }
+
+    public static long countMoviesFrom(List<Movie> movies, String director) {
+        /*for (Movie movie : movies) {
+            List<String> directors = movie.getDirector();
+            System.out.println("Directors for " + movie.getTitle() + ":");
+            if (directors == null || directors.isEmpty()) {
+                System.out.println("No directors found.");
+            } else {
+                System.out.println(directors);
+*/
+            return movies.stream()
+                    .filter(movie -> movie.getDirector() != null && movie.getDirector().contains(director))
+                    .count();
+        }
+
+
+     /* public static List<Movie> getMoviesBetweenYears(List<Movie> movies, int startYear, int endYear) {
+        return movies.stream()
+                .filter(movie -> movie.getReleaseYear()>= startYear && movie.getReleaseYear() <= endYear)
+                .collect(Collectors.toList());
+    }
+    /*public static long countMoviesFrom(List<Movie> movies, String director) { //gibt die Anzahl der Filme eines bestimmten Regisseurs zurück.
+
+        return movies.stream()
+                .flatMap(movie -> movie.getDirectors().stream())
+                .filter(director::equals)
+                .count();
+        /*
+
+        long count =0;
         for (Movie movie : movies) {
             for(String aDirector : movie.getDirector()){
                 if (aDirector== director) {
@@ -198,6 +277,17 @@ public class HomeController implements Initializable {
         return count;
     }
     public List<Movie> getMoviesBetweenYears(List<Movie> movies, int startYear, int endYear){ //gibt jene Filme zurück, die zwischen zwei gegebenen Jahren veröffentlicht wurden.
+        return count;*/
+
+
+
+    public static List<Movie> getMoviesBetweenYears(List<Movie> movies, int startYear, int endYear) { //gibt jene Filme zurück, die zwischen zwei gegebenen Jahren veröffentlicht wurden.
+
+        return movies.stream()
+                .filter(movie -> movie.getReleaseYear() > startYear && movie.getReleaseYear() < endYear)
+                .toList();
+    }
+     /*
         List<Movie> newFilteredList = new ArrayList<>();
         for (Movie movie : movies) {
             if (movie.getReleaseYear()> startYear &&  movie.getReleaseYear()<endYear) {
@@ -206,6 +296,7 @@ public class HomeController implements Initializable {
         }
         return newFilteredList;
     }
+        return newFilteredList;*/
 
 
     // ____________________________ LOADING SCREEN ________________________________//
@@ -225,10 +316,10 @@ public class HomeController implements Initializable {
         }
 
         //Just to see if the above implemented Methods do what they should
-        System.out.println("most Popular Actors = " + getMostPopularActor(movies));
-        System.out.println("longest title character count = " + getLongestMovieTitle(movies));
+        out.println("most Popular Actors = " + getMostPopularActor(movies));
+        out.println("longest title character count = " + getLongestMovieTitle(movies));
         //mit random Paramentern
-        System.out.println("count Movies from Director1 = " + countMoviesFrom(movies, "Director1"));
-        System.out.println("Movies zwischen 2015 und 2023 = " + getMoviesBetweenYears(movies, 2015, 2023));
+        out.println("count Movies from Director1 = " + countMoviesFrom(movies, "Frank Darabont"));
+        out.println("Movies zwischen 1972 und 1980 = " + getMoviesBetweenYears(movies, 1972, 1980));
     }
 }
