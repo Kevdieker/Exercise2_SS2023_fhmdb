@@ -2,6 +2,9 @@ package at.ac.fhcampuswien.fhmdb;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class MovieController {
     @FXML
     private Label description;
@@ -19,5 +22,11 @@ public class MovieController {
         genres.setText(movie.getGenresInStringFormat());
         releaseYear.setText("Release Year: " + String.valueOf(movie.getReleaseYear()));
         rating.setText("Rating: " + String.valueOf(movie.getRating()));
+    }
+
+    public static List<Movie> getMoviesBetweenYears(List<Movie> movies, int startYear, int endYear) {
+        return movies.stream()
+                .filter(movie -> movie.getReleaseYear() >= startYear && movie.getReleaseYear() <= endYear)
+                .collect(Collectors.toList());
     }
 }
