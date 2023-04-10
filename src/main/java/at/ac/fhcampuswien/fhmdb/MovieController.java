@@ -23,6 +23,14 @@ public class MovieController {
         releaseYear.setText("Release Year: " + String.valueOf(movie.getReleaseYear()));
         rating.setText("Rating: " + String.valueOf(movie.getRating()));
     }
+
+    public static int getLongestMovieTitle(List<Movie> movies) {
+        return movies.stream()
+                .map(Movie::getTitle)
+                .mapToInt(String::length)
+                .max()
+                .orElse(0);
+    }
     public static long countMoviesFrom(List<Movie> movies, String directors) {
         return movies.stream()
                 .filter(movie -> movie.getDirectors().equals(directors))
