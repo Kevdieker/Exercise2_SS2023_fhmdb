@@ -23,7 +23,11 @@ public class MovieController {
         releaseYear.setText("Release Year: " + String.valueOf(movie.getReleaseYear()));
         rating.setText("Rating: " + String.valueOf(movie.getRating()));
     }
-
+    public static long countMoviesFrom(List<Movie> movies, String directors) {
+        return movies.stream()
+                .filter(movie -> movie.getDirectors().equals(directors))
+                .count();
+    }
     public static List<Movie> getMoviesBetweenYears(List<Movie> movies, int startYear, int endYear) {
         return movies.stream()
                 .filter(movie -> movie.getReleaseYear() >= startYear && movie.getReleaseYear() <= endYear)
