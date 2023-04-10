@@ -27,7 +27,7 @@ public class HomeController implements Initializable {
     @FXML
     private TextField searchField;
     //private List<Movie> allMovies = new ArrayList<>(Movie.initializeMovies());
-    private List<Movie> allMovies = new ArrayList<>(MovieAPI.getAllMovies());
+    List<Movie> allMovies = MovieAPI.getAllMovies();
     private List<Movie> searchedMovies = allMovies;
     private List<Movie> filteredMoviesAfterGenre = allMovies;
     private List<Movie> filteredMoviesAfterRating = allMovies;
@@ -186,7 +186,7 @@ public class HomeController implements Initializable {
         }
         return longestElement.length();
     }
-    public long countMoviesFrom(List<Movie> movies, String director){ //gibt die Anzahl der Filme eines bestimmten Regisseurs zurück.
+    /*public long countMoviesFrom(List<Movie> movies, String director){ //gibt die Anzahl der Filme eines bestimmten Regisseurs zurück.
         int count =0;
         for (Movie movie : movies) {
             for(String aDirector : movie.getDirector()){
@@ -197,6 +197,8 @@ public class HomeController implements Initializable {
         }
         return count;
     }
+
+     */
     public List<Movie> getMoviesBetweenYears(List<Movie> movies, int startYear, int endYear){ //gibt jene Filme zurück, die zwischen zwei gegebenen Jahren veröffentlicht wurden.
         List<Movie> newFilteredList = new ArrayList<>();
         for (Movie movie : movies) {
@@ -226,9 +228,9 @@ public class HomeController implements Initializable {
 
         //Just to see if the above implemented Methods do what they should
         System.out.println("most Popular Actors = " + getMostPopularActor(movies));
-        System.out.println("longest title character count = " + getLongestMovieTitle(movies));
+        //System.out.println("longest title character count = " + getLongestMovieTitle(movies));
         //mit random Paramentern
-        System.out.println("count Movies from Director1 = " + countMoviesFrom(movies, "Director1"));
+        //System.out.println("count Movies from Director1 = " + countMoviesFrom(movies, "Director1"));
         System.out.println("Movies zwischen 2015 und 2023 = " + getMoviesBetweenYears(movies, 2015, 2023));
     }
 }
