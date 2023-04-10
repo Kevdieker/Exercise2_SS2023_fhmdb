@@ -170,6 +170,44 @@ public class HomeController implements Initializable {
     //NEW METHODS
     //should be implemented with Streams!!!!!!!!!!!
 
+    public static String getMostPopularActor(List<Movie> movies) {
+        return movies.stream()
+                .flatMap(movie -> movie.getMainCast().stream())
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()))
+                .entrySet()
+                .stream()
+                .max(Map.Entry.comparingByValue())
+                .map(Map.Entry::getKey)
+                .orElse(null);
+    }
+
+    public static int getLongestMovieTitle(List<Movie> movies) {
+        return movies.stream()
+                .mapToInt(movie -> movie.getTitle().length())
+                .max()
+                .orElse(0);
+    }
+
+    public static long countMoviesFrom(List<Movie> movies, String directors) {
+        /*for (Movie movie : movies) {
+            List<String> directors = movie.getDirector();
+            System.out.println("Directors for " + movie.getTitle() + ":");
+            if (directors == null || directors.isEmpty()) {
+                System.out.println("No directors found.");
+            } else {
+                System.out.println(directors);
+        */
+        return movies.stream()
+                .filter(movie -> movie.getDirectors() != null && movie.getDirectors().contains(directors))
+                .count();
+    }
+    public static List<Movie> getMoviesBetweenYears(List<Movie> movies, int startYear, int endYear) { //gibt jene Filme zurück, die zwischen zwei gegebenen Jahren veröffentlicht wurden.
+
+        return movies.stream()
+                .filter(movie -> movie.getReleaseYear() > startYear && movie.getReleaseYear() < endYear)
+                .toList();
+    }
+
     /*public static String getMostPopularActor(List<Movie> movies){  //gibt jene Person zurück, die am öftesten im mainCast der übergebenen Filme vorkommt.
     /*public static String getMostPopularActor(List<Movie> movies) {  //gibt jene Person zurück, die am öftesten im mainCast der übergebenen Filme vorkommt.
 
@@ -220,39 +258,6 @@ public class HomeController implements Initializable {
         */
 
 
-    public static String getMostPopularActor(List<Movie> movies) {
-        return movies.stream()
-                .flatMap(movie -> movie.getMainCast().stream())
-                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()))
-                .entrySet()
-                .stream()
-                .max(Map.Entry.comparingByValue())
-                .map(Map.Entry::getKey)
-                .orElse(null);
-    }
-
-    public static int getLongestMovieTitle(List<Movie> movies) {
-        return movies.stream()
-                .mapToInt(movie -> movie.getTitle().length())
-                .max()
-                .orElse(0);
-    }
-
-    public static long countMoviesFrom(List<Movie> movies, String director) {
-        /*for (Movie movie : movies) {
-            List<String> directors = movie.getDirector();
-            System.out.println("Directors for " + movie.getTitle() + ":");
-            if (directors == null || directors.isEmpty()) {
-                System.out.println("No directors found.");
-            } else {
-                System.out.println(directors);
-*/
-            return movies.stream()
-                    .filter(movie -> movie.getDirector() != null && movie.getDirector().contains(director))
-                    .count();
-        }
-
-
      /* public static List<Movie> getMoviesBetweenYears(List<Movie> movies, int startYear, int endYear) {
         return movies.stream()
                 .filter(movie -> movie.getReleaseYear()>= startYear && movie.getReleaseYear() <= endYear)
@@ -279,14 +284,6 @@ public class HomeController implements Initializable {
     public List<Movie> getMoviesBetweenYears(List<Movie> movies, int startYear, int endYear){ //gibt jene Filme zurück, die zwischen zwei gegebenen Jahren veröffentlicht wurden.
         return count;*/
 
-
-
-    public static List<Movie> getMoviesBetweenYears(List<Movie> movies, int startYear, int endYear) { //gibt jene Filme zurück, die zwischen zwei gegebenen Jahren veröffentlicht wurden.
-
-        return movies.stream()
-                .filter(movie -> movie.getReleaseYear() > startYear && movie.getReleaseYear() < endYear)
-                .toList();
-    }
      /*
         List<Movie> newFilteredList = new ArrayList<>();
         for (Movie movie : movies) {

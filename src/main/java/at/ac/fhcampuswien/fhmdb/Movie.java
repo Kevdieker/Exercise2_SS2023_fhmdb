@@ -16,9 +16,9 @@ public class Movie {
     private double rating;
     private int releaseYear;
     private List<String> mainCast = new ArrayList<>(); //are the actors
-    private List<String> director = new ArrayList<>();
+    private List<String> directors = new ArrayList<>();
 
-    public Movie(String id, String imgUrl, int lengthInMinutes, List<String> writers, String title, String description, List<Genre> genres, double rating, int releaseYear, List<String> mainCast, List<String> director) {
+    public Movie(String id, String imgUrl, int lengthInMinutes, List<String> writers, String title, String description, List<Genre> genres, double rating, int releaseYear, List<String> mainCast, List<String> directors) {
         this.id = id;
         this.imgUrl = imgUrl;
         this.lengthInMinutes = lengthInMinutes;
@@ -29,7 +29,7 @@ public class Movie {
         this.rating = rating;
         this.releaseYear = releaseYear;
         this.mainCast = mainCast;
-        this.director = director;
+        this.directors = directors;
     }
 
     //_________________________ GETTER & SETTER ______________________//
@@ -38,8 +38,8 @@ public class Movie {
     public void setTitle(String title) {
         this.title = title;
     }
-    public void setDirector(List<String> director) {
-        this.director = director;
+    public void setDirectors(List<String> directors) {
+        this.directors = directors;
     }
     public String getId() {
         return id;
@@ -80,8 +80,10 @@ public class Movie {
     public List<String> getMainCast() {return mainCast;}
     public void setMainCast(List<String> mainCast) {this.mainCast = mainCast;}
     public void addMainCast(String actor){this.mainCast.add(actor);}
-    public void addDirector(String director) {this.director.add(director);}
-    public List<String> getDirector() {return director;}
+    public void addDirector(String director) {this.directors.add(director);}
+    public List<String> getDirectors() {
+        return directors;
+    }
 
 
     //_________________________ METHODS ______________________//
@@ -93,7 +95,7 @@ public class Movie {
         movie.setRating(10.0);
         movie.setReleaseYear(2022);
         movie.setMainCast(List.of("Kevin","Nadine"));
-        movie.setDirector(List.of("Director1"));
+        movie.setDirectors(List.of("Director1"));
         movies.add(movie);
         movie = new Movie("Matrix Murder");
         movie.setDescription("In Math class, there is a topic, everyone fears! Only the bravest students will survive. They already fought 2 whole battles. Our fighters heavily injured.\n" + "Watch the last ultimate battle of the last possible examination. Will they fail or will they survive?\n");
@@ -101,7 +103,7 @@ public class Movie {
         movie.setRating(9.3);
         movie.setReleaseYear(1955);
         movie.setMainCast(List.of("Maths Teacher","Nadine"));
-        movie.setDirector(List.of("Director 1"));
+        movie.setDirectors(List.of("Director 1"));
         movies.add(movie);
         movie = new Movie("Operating Systems o´clock");
         movie.setDescription("It is time for operating systems. Get the laptops out, start the console line and let´s go. Every command will effect something different, every combination\n" + "an individual masterpiece. It is up to the programmer, what he wants to do next. Will all the missing parts be found to succeed? Will all riddles get solved?\n" + "This is an up close movie to the fight of getting all points in the operating system test on Oracle.\n");
@@ -109,7 +111,7 @@ public class Movie {
         movie.setRating(8.7);
         movie.setReleaseYear(1980);
         movie.setMainCast(List.of("Unknown","Grandma","Grandpa"));
-        movie.setDirector(List.of("Director2"));
+        movie.setDirectors(List.of("Director2"));
         movies.add(movie);
         movie = new Movie("Operating Systems o´clock 2");
         movie.setDescription("They failed. But only so closely. But nevertheless they failed. What do to now? Preparing better, getting better, being better! But will it be enough in the\n" + "end? Or will they have to submit themselves to the powers of the complexity of the operating systems ...\n");
@@ -117,7 +119,7 @@ public class Movie {
         movie.setRating(7.2);
         movie.setReleaseYear(1964);
         movie.setMainCast(List.of("Unknown","Grandma","Grandpa"));
-        movie.setDirector(List.of("Director2"));
+        movie.setDirectors(List.of("Director2"));
         movies.add(movie);
         movie = new Movie("Oh Campina Campina!");
         movie.setDescription("Our daily meal as students of FHCW, a mystery. We are visiting the kitchen of Campina for one day. Come and see how we discover and expose all secrets.\n" + "Recipes included!\n");
@@ -125,7 +127,7 @@ public class Movie {
         movie.setRating(7.8);
         movie.setReleaseYear(1943);
         movie.setMainCast(List.of("Unknown"));
-        movie.setDirector(List.of("Director3"));
+        movie.setDirectors(List.of("Director3"));
         movies.add(movie);
         movie = new Movie("Dream Team");
         movie.setDescription("Teamwork can be exhausting, traumatizing and depressing. However, all above it is the most beautiful thing in the world!\n");
@@ -133,7 +135,7 @@ public class Movie {
         movie.setRating(7.5);
         movie.setReleaseYear(2003);
         movie.setMainCast(List.of("Kevin","Nadine","Valentina","Fatima"));
-        movie.setDirector(List.of("Director1"));
+        movie.setDirectors(List.of("Director1"));
         movies.add(movie);
         movie = new Movie("Rubber duck invasion");
         movie.setDescription("The first rubber duck was found nowhere less special than in David Brek's backpack on his way to a heist. He, most feared leader, and his accomplices\n" + "were the most-wanted criminals in whole Western City. Since that moment, even more and more ducks appeared in their backpacks. No matter how\n" + "much they observed their backpacks, the duck drama didn´t end. If they don´t stop the duck avalanche in time they will be found. The time is ticking.\n");
@@ -141,7 +143,7 @@ public class Movie {
         movie.setRating(5.7);
         movie.setReleaseYear(2005);
         movie.setMainCast(List.of("Nadine","Valentina"));
-        movie.setDirector(List.of("Director1"));
+        movie.setDirectors(List.of("Director1"));
         movies.add(movie);
         movie = new Movie("Howdy Campus");
         movie.setDescription("Explore the Wild West in 'Howdy Campus: Uncovering the Origins of the FH'.\nWitness the struggles of a small group of pioneers wanting to bring education in a land without laws and rules.\nWill they be successful? This captivating documentary is a must-see for anyone who loves history, the Wild West, and the power of knowledge.\"");
@@ -149,7 +151,7 @@ public class Movie {
         movie.setRating(1.5);
         movie.setReleaseYear(2005);
         movie.setMainCast(List.of("Unknown","Kevin","Fatima"));
-        movie.setDirector(List.of("DirectorKevin"));
+        movie.setDirectors(List.of("DirectorKevin"));
         movies.add(movie);
         movie = new Movie("Finishing the race");
         movie.setDescription("The finish line in vision, only view last miles left. After running for so long the race between students and test are finally to an end. Now the have to face\n" + "their last ultimate enemy. They have to find out if they are up to this task after such long fighting or if they just got exhausted by now? If they are able to\n" + "overtake, what next? What is there after the finishing line, is it even worth it or will there be just another running track till infinity ...\n");
@@ -157,7 +159,7 @@ public class Movie {
         movie.setRating(3.6);
         movie.setReleaseYear(2018);
         movie.setMainCast(List.of("Kevin","Nadine","Valentina","Fatima"));
-        movie.setDirector(List.of("Director3"));
+        movie.setDirectors(List.of("Director3"));
         movies.add(movie);
         return movies;
 
